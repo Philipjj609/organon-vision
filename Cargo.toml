@@ -1,0 +1,26 @@
+[workspace]
+resolver = "2"
+members = ["crates/vision-core", "crates/vision-cli"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/Philipjj609/organon-vision"
+rust-version = "1.82"
+
+[workspace.dependencies]
+organon-protocol = { git = "https://github.com/Philipjj609/organon-protocol", tag = "v0.1.4" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png", "webp", "gif", "bmp"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+
+# Model inference is unusably slow without optimisation (ocrs: seconds become minutes).
+[profile.dev.package."*"]
+opt-level = 2

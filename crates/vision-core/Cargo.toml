@@ -1,0 +1,29 @@
+[package]
+name = "organon-vision-core"
+description = "Image perception: measures, text lines, layout blocks, palette and objects of a still image as located organon-protocol observations. Pure logic, no I/O policy."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[features]
+default = ["models"]
+# Engines that run neural models in pure Rust: ocrs (text) and RTen (objects).
+models = ["dep:ocrs", "dep:rten", "dep:rten-tensor", "dep:rten-imageproc"]
+
+[dependencies]
+organon-protocol.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+image.workspace = true
+thiserror = "1"
+kmeans_colors = { version = "0.7", default-features = false, features = ["palette_color"] }
+palette = { version = "0.7", default-features = false, features = ["std"] }
+ocrs = { version = "0.14", optional = true }
+rten = { version = "0.28", optional = true }
+rten-tensor = { version = "0.28", optional = true }
+rten-imageproc = { version = "0.28", optional = true }
+
+[lints]
+workspace = true
